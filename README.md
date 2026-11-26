@@ -6,7 +6,7 @@ Tasks:
 Create a basic HTML structure.
 Set the webpage title to “My Daily Routine”.
 Add a main heading: “My Daily Routine”.
-Divide your routine into Morning, Afternoon, and Evening using <h2> tags.
+Divide your routine into Morning, Afternoon, and Evening using #<h2> tags.
 Write a paragraph under each heading.
 
 Expected Output:
