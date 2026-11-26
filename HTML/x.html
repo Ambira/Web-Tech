@@ -1,0 +1,183 @@
+import xml.etree.ElementTree as ET
+from xml.dom import minidom
+from pathlib import Path
+
+entries = []
+
+def entry(mal_id, watched, status, score=0, start_date=None):
+    d = {
+        "series_animedb_id": str(mal_id),
+        "my_watched_episodes": str(watched),
+        "my_dub_watched_episodes": "0",
+    }
+    if start_date:
+        d["my_start_date"] = start_date
+    d["my_score"] = str(score)
+    d["my_status"] = status
+    d["update_on_import"] = "1"
+    entries.append(d)
+
+DONE, WATCH = "Completed", "Watching"
+
+# 1. Vinland Saga S1 only
+entry(37521, 24, DONE)
+
+# 2. Demon Slayer: completed arcs + 2 episodes of Hashira Training.
+entry(38000, 26, DONE)   # Season 1
+entry(49926, 7, DONE)   # Mugen Train TV arc
+entry(47778, 11, DONE)  # Entertainment District
+entry(51019, 11, DONE)  # Swordsmith Village
+entry(55701, 2, WATCH)  # Hashira Training (8 total)
+# Infinity Castle theatrical movie: MAL entry ID not confidently confirmed; added below with ID 0 for manual matching.
+entry(0, 1, DONE, 0)    # Demon Slayer: Infinity Castle (movie; manual MAL matching needed)
+
+# 3. Chainsaw Man S1
+entry(44511, 12, DONE)
+
+# 4. Jujutsu Kaisen S2 — Hidden Inventory arc only (first 5 of 23)
+entry(51009, 5, WATCH)
+
+# 5. SPY x FAMILY — all released seasons
+entry(50265, 25, DONE)  # S1
+entry(53887, 12, DONE)  # S2
+entry(59027, 13, DONE)  # S3
+
+# 6. Bungo Stray Dogs — through S5 ep 7
+entry(31478, 12, DONE)
+entry(32867, 12, DONE)
+entry(38003, 12, DONE)
+entry(44042, 13, DONE)
+entry(50330, 7, WATCH)
+
+# 7. Mashle S1 and S2 completed
+entry(52211, 12, DONE)
+entry(55813, 12, DONE)
+
+# 8. Death Note
+entry(1535, 37, DONE)
+
+# 9. Tokyo Revengers: all earlier seasons + 2 eps of War of the Three Titans.
+entry(42249, 24, DONE)   # S1
+entry(50694, 13, DONE)   # Christmas Showdown
+entry(54918, 13, DONE)   # Tenjiku
+entry(0, 2, WATCH)       # Santen Sensou-hen / War of the Three Titans (MAL ID not confirmed)
+
+# 10. Tokyo Ghoul S1 only
+entry(22319, 12, DONE)
+
+# 11. Attack on Titan — main TV anime, excluding compilation/final movie
+entry(16498, 25, DONE)
+entry(25777, 12, DONE)
+entry(35760, 12, DONE)   # Season 3 Part 1
+entry(38524, 10, DONE)   # Season 3 Part 2
+entry(40028, 16, DONE)   # Final Season Part 1
+entry(48583, 12, DONE)   # Final Season Part 2
+entry(51535, 2, DONE)    # Final Chapters specials
+
+# 12. Hunter x Hunter (2011)
+entry(11061, 148, DONE)
+
+# 13. IDOLiSH7 main TV seasons
+entry(33899, 17, DONE)
+entry(37962, 15, DONE)
+entry(45577, 13, DONE)
+entry(50470, 17, DONE)
+
+# 14. My Neighbor Totoro
+entry(523, 1, DONE)
+
+# 15. Hell's Paradise S1
+entry(46569, 13, DONE)
+
+# 16. Howl's Moving Castle — 10/10
+entry(431, 1, DONE, 10)
+
+# 17. Moriarty the Patriot — both TV parts
+entry(40911, 11, DONE)
+entry(43325, 13, DONE)
+
+# 18. Wotakoi
+entry(35968, 11, DONE)
+
+# 19. The Case Study of Vanitas
+entry(48580, 24, DONE)
+
+# 20. One Punch Man through S2
+entry(30276, 12, DONE)
+entry(34134, 12, DONE)
+
+# 21. Assassination Classroom: both seasons completed; movie halfway
+entry(24833, 22, DONE)
+entry(30654, 25, DONE)
+entry(36949, 0, WATCH)  # movie watched halfway; no fractional episode count possible
+
+# 22. Gakuen Babysitters
+entry(35222, 12, DONE)
+
+# 23. Misfit of Demon King Academy — S2 split cour; "S3" likely refers to S2 Part 2.
+entry(40496, 13, DONE)  # S1
+entry(48417, 12, DONE)  # S2 Part 1
+entry(48418, 12, DONE)  # S2 Part 2 ID needs MAL verification; marked with placeholder below if unsupported
+
+# 24. One Piece through episode 1129
+entry(21, 1129, WATCH)
+
+# 25. Classroom of the Elite S1
+entry(34933, 12, DONE)
+
+# 26. JoJo — main anime through Stone Ocean + SBR through ep 9.
+entry(14719, 26, DONE)  # Parts 1 & 2
+entry(20474, 24, DONE)  # Stardust Crusaders
+entry(26055, 24, DONE)  # Stardust Crusaders 2nd Season
+entry(31933, 39, DONE)  # Diamond is Unbreakable
+entry(37991, 39, DONE)  # Golden Wind
+entry(48661, 38, DONE)  # Stone Ocean
+entry(0, 9, WATCH)       # Steel Ball Run; MAL ID not confirmed
+
+# 27. My Hero Academia S5 only
+entry(41587, 25, DONE)
+
+# 28. Yamishibai S1
+entry(19383, 13, DONE)
+
+# 29. Loving Yamada at Level 999
+entry(53126, 13, DONE)
+
+# 30. Horimiya S1 + The Missing Pieces; dates only on original Horimiya.
+entry(42897, 13, DONE, start_date="2023-05-08 00:00:00")
+entry(54856, 13, DONE)
+
+# Gintama — all principal TV seasons/parts, specials, and the specified films.
+# Every Gintama entry gets 10/10.
+for mal_id, eps in [
+    (918, 201),       # Gintama
+    (9969, 51),       # Gintama'
+    (15417, 13),      # Enchousen
+    (28977, 51),      # Gintama°
+    (34096, 12),      # Gintama.
+    (35843, 13),      # Porori-hen
+    (37491, 12),      # Silver Soul
+    (38414, 14),      # Silver Soul - Second Half War
+    (44087, 2),       # The Semi-Final
+    (39486, 1),       # The Very Final
+]:
+    entry(mal_id, eps, DONE, 10)
+
+# 2026 Yoshiwara in Flames movie — user says watched 2026-10-08, 10/10.
+entry(0, 1, DONE, 10, start_date="2026-10-08 00:00:00")
+
+root = ET.Element("myanimelist")
+myinfo = ET.SubElement(root, "myinfo")
+ET.SubElement(myinfo, "user_export_type").text = "1"
+for data in entries:
+    anime = ET.SubElement(root, "anime")
+    for key, value in data.items():
+        ET.SubElement(anime, key).text = value
+
+pretty = minidom.parseString(ET.tostring(root, encoding="utf-8")).toprettyxml(
+    indent="  ", encoding="UTF-8"
+)
+out_path = Path("/mnt/data/ambira_mal_import_final.xml")
+out_path.write_bytes(pretty)
+
+print(f"Created {out_path} with {len(entries)} anime entries.")

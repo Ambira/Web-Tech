@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<!-- Daily routine instructions: Divide your routine into Morning, Afternoon, and Evening using tags.-->
+<!--Write a paragraph under each heading.Expected Output:A webpage showing your daily routine in an organized format.-->
+
+<html>
+<head>
+    <title>My Daily Routine</title>
+</head>
+<body>
+    <h1>My Daily Routine</h1>
+	<h2>For all days except weekend</h2>
+
+	<h3><span style= "color:green">Morning</span></h3>
+		<p>5:09 AM : Wake Up</br>
+		5:15 AM : Freshen Up</br>
+		5:50 AM : Have breakfast ready to leave</br>
+		6:00 AM : Leave for college </p>
+		<p>6:25 AM :Reach college and attend all classes</p>
+
+	<h3><span style= "color:green">Afternoon</span></h3>
+		<p>12:20 PM : classes end leave for home </br>
+		1:00 PM : Have lunch freshen up </br>
+		1:40 PM : A lil break </br>
+		2:30 PM : Assigments and Lab work </br>
+		4:00 PM : Snack and music break </p>
+
+	<h3><span style= "color:green">Evening</span></h3>
+		<p>6:00 PM : Browsing the internet </br>
+		7:00 PM : college work if left any and or study</br>
+		8:00 PM : book reading and journal if the mood is right</br>
+		9:00 PM : Wind down and try sleeping :) </p>
+
+<h5> Might or might not be a fabricated routine completed 9:41 PM 24/11/2026 (Ambira Pradhan)</h5>
+
+</body>
+
+<!--mini side note for myself this was kinda fun -->
+</html>
