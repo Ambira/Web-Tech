@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTML Lists</title>
+</head>
+<body>
+    <h1>Learning Web Development</h1>
+
+    <ol type="I" start="2">
+        <li>Frontend Development
+        <ul style="list-style-type:disc;">
+            <li>HTML
+                <ol type="A" start="3">
+                    <li>Elements</li>
+                    <li>Attributes</li>
+                    <li>Forms</li>
+                </ol>
+            </li>
+                
+            <li>CSS
+                <ul style="list-style-type:circle;">
+                    <li>Selectors</li>
+                    <li>Flexbox</li>
+                </ul>
+                </li>
+            <li>JavaScript
+                <ol type="i" reversed>
+                    <li>Variables</li>
+                    <li>Functions</li>
+                    <li>Arrays</li>
+                </ol>
+            </li>
+        </ul>
+        </li>
+        <li>Backend Development
+                <ul style="list-style-type:square">
+                    <li>PHP</li>
+                    <li>Node.js</li>
+                    <li>Python</li>
+                </ul>
+        </li>
+        <li>Database
+                <ol type="1" start="5" reversed>
+                    <li>MySQL</li>
+                    <li>MongoDB</li>
+                    <li>PostgreSQL</li>
+                </ol>
+        </li>
+        <li>Deployment
+                <ol type="a" start="2">
+                    <li>Git</li>
+                    <li>Github</li>
+                    <li>Cloud Hosting</li>
+                </ol>
+        </li>
+    </ol>
+</body>
+</html>
